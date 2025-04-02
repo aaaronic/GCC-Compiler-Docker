@@ -15,7 +15,7 @@ CFLAGS             = -O2 -Wall -pedantic -Wextra -std=c99 -save-temps
 
 # --- Linker
 LD                 = gcc
-LDFLAGS            = $(SPECS) $(MODEL) -lm
+LDFLAGS            = -lm
 
 # --- Delete
 RM                 = rm -f
@@ -26,9 +26,14 @@ OBJECTS = $(COBJECTS)
 
 # --- Main build target
 
-all: clean buildrun
+all: clean compileStart build run
 
-buildrun: $(BIN_NAME)
+compileStart:
+	@echo "Compiling..."
+
+build: $(BIN_NAME)
+
+run:
 	@echo -e "\n\nRunning Program:"
 	@./$(BIN_NAME)
 	@echo ""
@@ -40,10 +45,8 @@ $(BIN_NAME) : $(OBJECTS)
 
 # -- Build .c files into .o files
 $(COBJECTS) : %.o : %.c
-	@echo "Compiling..."
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@echo "Cleaning..."
-	$(RM) $(BIN_NAME)
-	$(RM) *.o *.i *.s
+	$(RM) $(BIN_NAME) *.o *.i *.s

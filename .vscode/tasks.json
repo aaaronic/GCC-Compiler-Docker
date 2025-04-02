@@ -7,11 +7,31 @@
             "label": "build run",
             "type": "shell",
             "command": "docker run --rm -it -v \"${PWD}:/app\" aaaronic/gcc:1.0",
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "powershell.exe"
+                    }
+                }
+            },
             "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "docker run --rm -it -v \"${PWD}:/app\" aaaronic/gcc:1.0 sh -c 'cd /app && make clean'",
+            "windows": {
+                "options": {
+                    "shell": {
+                        "executable": "powershell.exe"
+                    }
+                }
+            },
+            "problemMatcher": []
         }
     ]
   }
