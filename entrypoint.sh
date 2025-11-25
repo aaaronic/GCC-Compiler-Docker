@@ -9,7 +9,10 @@ if [ ! -f /app/Makefile ]; then
 fi
 
 make "$@"
+exit_code=$?
 
 if [ -n "$CLEANUP_MAKEFILE" ]; then
   rm /app/Makefile
 fi
+
+exit $exit_code
